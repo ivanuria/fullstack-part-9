@@ -11,9 +11,9 @@ enum CLASSIFICATION {
   Obese_III = 'Obese (Class III)',
 };
 
-type limitType = {
-  name: CLASSIFICATION,
-  limit: number,
+interface limitType {
+  name: CLASSIFICATION;
+  limit: number;
 }
 
 const RANGES:limitType[] = [

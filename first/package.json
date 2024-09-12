@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts-node": "ts-node",
-    "calculateBmi": "ts-node bmiCalculator"
+    "calculateBmi": "ts-node bmiCalculator",
+    "calculateExercises": "ts-node exerciseCalculator"
   },
   "author": "Iván Uría",
   "license": "MIT",
