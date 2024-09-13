@@ -3,6 +3,11 @@ const ratingDescription = [
   'So you have decided you should go to the fridge and count that as an exercise, haven\'t you?',
   'Ok, you performed as expected. You shall higher your expectatives though. You lazy sloth.'
 ];
+const ratingDescriptionNormal = [
+  'Forgive yourself only once in a while but check if you are aiming for a achievable goal',
+  'Not as much as expected, but, hey, you haven\'t stayed still either',
+  'It\'s the Eye of the Tiger, It\'s the thrill of the fight'
+];
 
 interface result {
   periodLength: number;
@@ -28,10 +33,23 @@ const calculateExercises = (dailyExercise:number[], target:number) : result => {
     trainingDays,
     success: average >= target,
     rating,
-    ratingDescription: ratingDescription[rating - 1],
+    ratingDescription: target < 1.5 ? ratingDescription[rating - 1] : ratingDescriptionNormal[rating - 1],
     target,
     average,
   }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+const parseArgs = () : [Array<number>, number] => {
+  const args = process.argv.slice(2).map(item => Number(item)); // They are all numbers after all
+
+  if (args.length < 2 )
+    throw new Error('You must provide at least two numbers: target day1 day2 day3...');
+
+  if (args.some(item => isNaN(item)))
+    throw new Error('All provided items should be numbers');
+
+  return [args.slice(1), args[0]]
+}
+
+const [days, target] = parseArgs();
+console.log(calculateExercises(days, target))

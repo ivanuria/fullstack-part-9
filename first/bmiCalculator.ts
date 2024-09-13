@@ -44,11 +44,7 @@ const RANGES:limitType[] = [
   {
     name: CLASSIFICATION.Obese_II,
     limit: 40,
-  },
-  {
-    name: CLASSIFICATION.Obese_III,
-    limit: 999999,
-  }, // This will make my life easier
+  }
 ]; // This is more verbose than expected, though more understandable
 
 const sortLimits = (prev:limitType, next:limitType) => prev.limit - next.limit;
@@ -59,7 +55,27 @@ const calculateBmi = (height: number, weight: number) : CLASSIFICATION => {
     if (BMI < classification.limit)
       return classification.name;
   }
-  throw new Error(`End of classification with a BMI of ${BMI}`);
+  return CLASSIFICATION.Obese_III; // Default
 }
 
-console.log(calculateBmi(180, 74))
+const parseArgs = () : [number, number] => {
+  const args = process.argv.slice(2);
+
+  if (args.length < 2)
+    throw new Error ('Height and Weight should be provided')
+  if (args.length > 2)
+    throw new Error ('Only Height and Weight should be provided')
+
+  const [height, weight] = args.map(item => Number(item)); // Directly to number
+
+  if (isNaN(height) && isNaN(weight))
+    throw new Error ('Height and Weight should be numbers')
+  if (isNaN(height))
+    throw new Error ('Height should be a number')
+  if (isNaN(weight))
+    throw new Error ('Weight should be a number')
+  return [height, weight];
+}
+
+const [height, weight] = parseArgs();
+console.log(calculateBmi(height, weight));
