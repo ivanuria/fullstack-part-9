@@ -1,5 +1,3 @@
-export {}; // I've been playing araound a while
-
 enum CLASSIFICATION {
   Underweight_III = 'Underweight (Severe thinness)',
   Underweight_II = 'Underweight (Moderate thinness)',
@@ -58,24 +56,26 @@ const calculateBmi = (height: number, weight: number) : CLASSIFICATION => {
   return CLASSIFICATION.Obese_III; // Default
 }
 
-const parseArgs = () : [number, number] => {
-  const args = process.argv.slice(2);
-
+export const parseArgs = (args = process.argv.slice(2)) : [number, number] => {
   if (args.length < 2)
-    throw new Error ('Height and Weight should be provided')
+    throw new Error ('Height and Weight should be provided');
   if (args.length > 2)
-    throw new Error ('Only Height and Weight should be provided')
+    throw new Error ('Only Height and Weight should be provided');
 
   const [height, weight] = args.map(item => Number(item)); // Directly to number
 
   if (isNaN(height) && isNaN(weight))
-    throw new Error ('Height and Weight should be numbers')
+    throw new Error ('Height and Weight should be numbers');
   if (isNaN(height))
-    throw new Error ('Height should be a number')
+    throw new Error ('Height should be a number');
   if (isNaN(weight))
-    throw new Error ('Weight should be a number')
+    throw new Error ('Weight should be a number');
   return [height, weight];
 }
 
-const [height, weight] = parseArgs();
-console.log(calculateBmi(height, weight));
+if (require.main === module) {
+  const [height, weight] = parseArgs();
+  console.log(calculateBmi(height, weight));
+}
+
+export default calculateBmi;
