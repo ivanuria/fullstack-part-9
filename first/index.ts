@@ -44,7 +44,6 @@ app.post('/exercises', (req, res) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { daily_exercises:reqDailyExercises, target:reqTarget } = req.body;
   // Clean and check exercises
-
   checkCleanData(
     typeof (reqDailyExercises as number[]).map !== 'function',
     'daily exercises shuld be an array of numbers',
