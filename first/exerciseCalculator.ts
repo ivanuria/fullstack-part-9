@@ -9,7 +9,7 @@ const ratingDescriptionNormal = [
   'It\'s the Eye of the Tiger, It\'s the thrill of the fight'
 ];
 
-interface result {
+export interface result {
   periodLength: number;
   trainingDays: number;
   success: boolean;
@@ -19,7 +19,7 @@ interface result {
   average: number
 }
 
-const calculateExercises = (dailyExercise:number[], target:number) : result => {
+export default function calculateExercises (dailyExercise:number[], target:number) : result {
   const periodLength = dailyExercise.length;
   const trainingDays = dailyExercise.filter(day => day > 0).length;
   const average = dailyExercise.reduce((a, b) => a + b, 0) / periodLength;
@@ -37,7 +37,7 @@ const calculateExercises = (dailyExercise:number[], target:number) : result => {
     target,
     average,
   };
-};
+}
 
 const parseArgs = () : [Array<number>, number] => {
   const args = process.argv.slice(2).map(item => Number(item)); // They are all numbers after all
@@ -51,5 +51,7 @@ const parseArgs = () : [Array<number>, number] => {
   return [args.slice(1), args[0]];
 };
 
-const [days, target] = parseArgs();
-console.log(calculateExercises(days, target));
+if (require.main === module) {
+  const [days, target] = parseArgs();
+  console.log(calculateExercises(days, target));
+}
