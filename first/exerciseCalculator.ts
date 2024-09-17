@@ -36,8 +36,8 @@ const calculateExercises = (dailyExercise:number[], target:number) : result => {
     ratingDescription: target < 1.5 ? ratingDescription[rating - 1] : ratingDescriptionNormal[rating - 1],
     target,
     average,
-  }
-}
+  };
+};
 
 const parseArgs = () : [Array<number>, number] => {
   const args = process.argv.slice(2).map(item => Number(item)); // They are all numbers after all
@@ -48,8 +48,8 @@ const parseArgs = () : [Array<number>, number] => {
   if (args.some(item => isNaN(item)))
     throw new Error('All provided items should be numbers');
 
-  return [args.slice(1), args[0]]
-}
+  return [args.slice(1), args[0]];
+};
 
 const [days, target] = parseArgs();
-console.log(calculateExercises(days, target))
+console.log(calculateExercises(days, target));

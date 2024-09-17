@@ -8,7 +8,7 @@ const app = express();
 const logMiddleware: Express.RequestHandler = (req, _res, next) => {
   console.log(req.method, req.originalUrl);
   next();
-}
+};
 
 const checkCleanData = (condition:boolean, message:string, res:Express.Response) => {
   if (condition)
@@ -16,7 +16,7 @@ const checkCleanData = (condition:boolean, message:string, res:Express.Response)
       .status(400)
       .json({ 'error': message })
       .end();
-}
+};
 
 app.use(logMiddleware);
 

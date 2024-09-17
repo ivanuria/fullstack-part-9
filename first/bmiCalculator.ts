@@ -54,7 +54,7 @@ const calculateBmi = (height: number, weight: number) : CLASSIFICATION => {
       return classification.name;
   }
   return CLASSIFICATION.Obese_III; // Default
-}
+};
 
 export const parseArgs = (args = process.argv.slice(2)) : [number, number] => {
   if (args.length < 2)
@@ -71,7 +71,7 @@ export const parseArgs = (args = process.argv.slice(2)) : [number, number] => {
   if (isNaN(weight))
     throw new Error ('Weight should be a number');
   return [height, weight];
-}
+};
 
 if (require.main === module) {
   const [height, weight] = parseArgs();
