@@ -2,8 +2,10 @@ import express from 'express';
 import type Express from 'express';
 import cors from 'cors';
 
+import diagnosisRouter from './routes/diagnosis';
+
 const app = express();
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+ 
 app.use(cors());
 app.use(express.json());
 
@@ -18,6 +20,9 @@ app.use(requestLogger);
 app.get('/api/ping', (_req, res) => {
   res.send('pong');
 });
+
+// Diagnosis
+app.use('/api/diagnosis', diagnosisRouter);
 
 const PORT = 3001;
 
