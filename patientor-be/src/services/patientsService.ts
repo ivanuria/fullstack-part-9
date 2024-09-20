@@ -11,7 +11,13 @@ const getNonSensibleData = (): PatientNonSensible[] => {
   }));
 };
 
+const addEntry = (entry: Patient): Patient => {
+  data.push(entry);
+  return entry;
+};
+
 export default {
   getEntries,
-  getNonSensibleData
+  getNonSensibleData,
+  addEntry,
 };
